@@ -1,0 +1,2 @@
+playableInZone = false;
+emitters = [];

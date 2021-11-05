@@ -1,0 +1,158 @@
+respawnOnStart = 0;
+
+class Params
+{
+	class DogDiv
+	{
+		title = "=========Dog Parameters=========";
+		values[] = { 0 };
+		texts[] = { "" };
+	};
+	class PingAccuracy
+	{
+		title = "Zaroff's Dogs' Accuracy";
+		values[] = { -1, 0, 25, 50, 75, 100 };
+		texts[] = { "No hunting dogs", "0 m", "25 m", "50 m", "75 m", "100 m" };
+		default = 50;
+	};
+	class PingChance
+	{
+		title = "Zaroff's Dogs' Chance Of Detection";
+		values[] = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+		texts[] = { "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "Always" };
+		default = 50;
+	};
+	class PingTimer
+	{
+		title = "Zaroff's Dogs' Time Interval";
+		values[] = { 1, 5, 10, 20, 30, 40, 50, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600 };
+		texts[] = { "Constant Sniffing", "5s", "10s", "20s", "30s", "40s", "50s", "1 min", "90s", "2 min", "150s", "3 min", "4 min", "5 min", "6 min", "7 min", "8 min", "9 min", "10 min" };
+		default = 180;
+	};
+	class ShootingDiv
+	{
+		title = "=========Shooting Parameters=========";
+		values[] = { 0 };
+		texts[] = { "" };
+	};
+	class ShootingTimer
+	{
+		title = "Hunting Grounds Perimeter Hunters Waiting Time";
+		values[] = { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 120 };
+		texts[] = { "Instant Death", "5s", "10s", "15s", "20s", "25s", "30s", "35s", "40s", "45s", "50s", "55s", "1 min", "2 min" };
+		default = 40;
+	};
+	class ShrinkDiv
+	{
+		title = "=========Shrinking Parameters=========";
+		values[] = { 0 };
+		texts[] = { "" };
+	};
+	class ShrinkingRatio
+	{
+		title = "Hunting Grounds Shrinking Ratio";
+		values[] = { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
+		texts[] = { "Free For All Hunt", "5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%", "55%", "60%", "65%", "70%", "75%", "80%", "85%", "90%", "95%", "No Shrinking" };
+		default = 80;
+	};
+	class ShrinkingLimit
+	{
+		title = "Hunting Grounds Sudden Death Limit";
+		values[] = { 0, 50, 100, 150, 200, 250};
+		texts[] = { "Shrink Forever", "50m", "100m", "150m", "200m", "250m" };
+		default = 100;
+	};
+	class ShrinkingLimitCountdown
+	{
+		title = "Hunting Grounds Sudden Death Countdown?";
+		values[] = { 0, 1 };
+		texts[] = { "No", "Yes" };
+		default = 1;
+	};
+	class ShrinkingTimer
+	{
+		title = "Hunting Grounds Shrinking Time Interval";
+		values[] = { 0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 300, 360, 420, 480, 540, 600 };
+		texts[] = { "Instant", "15s", "30s", "45s", "1 min", "75s", "90s", "105s", "2 min", "135s", "150s", "165s", "3 min", "195s", "210s", "225s", "4 min", "5 min", "6 min", "7 min", "8 min", "9 min", "10 min" };
+		default = 120;
+	};
+	class WeaponDiv
+	{
+		title = "=========Weapon Parameters=========";
+		values[] = { 0 };
+		texts[] = { "" };
+	};
+	class WeaponCount
+	{
+		title = "Hunting Grounds Weapon Count";
+		values[] = { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 120, 140, 160, 180, 200 };
+		texts[] = { "No weapons", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100", "120", "140", "160", "180", "200" };
+		default = 60;
+	};
+	class WeaponHunter
+	{
+		title = "Which Hunter Weapon?";
+		values[] = { 0, 1, 2 };
+		texts[] = { "K98", "K98 With Scope", "G41" };
+		default = 2;
+	};
+	class VisionDiv
+	{
+		title = "=========Vision Parameters=========";
+		values[] = { 0 };
+		texts[] = { "" };
+	};
+	class ShowNext
+	{
+		title = "Show Next Hunting Grounds?";
+		values[] = { 0, 1 };
+		texts[] = { "No", "Yes" };
+		default = 1;
+	};
+	class ShowWeapons
+	{
+		title = "Show Weapons?";
+		values[] = { 0, 1 };
+		texts[] = { "No", "Yes" };
+		default = 0;
+	};
+	class SpawnDiv
+	{
+		title = "=========Spawn Parameters=========";
+		values[] = { 0 };
+		texts[] = { "" };
+	};
+	class RandomHunter
+	{
+		title = "Zaroff Starts In A Random Spot?";
+		values[] = { 0, 1 };
+		texts[] = { "No", "Yes" };
+		default = 1;
+	};
+	class RandomPrey
+	{
+		title = "Prey Start In A Random Spot?";
+		values[] = { 0, 1 };
+		texts[] = { "No", "Yes" };
+		default = 1;
+	};
+	class PreyTogether
+	{
+		title = "Prey Starts Together?";
+		values[] = { 0, 1 };
+		texts[] = { "No", "Yes" };
+		default = 0;
+	};
+};
+
+class CfgFunctions
+{
+	class TMDG
+	{
+		tag = "TMDG";
+		class Generic
+		{
+			class RandomWithinCircle {};
+		};
+	};
+};

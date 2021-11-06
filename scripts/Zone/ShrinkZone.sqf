@@ -189,6 +189,11 @@ if isServer then
 		if (_resize_ratio == 0) then {
 			trig_play_area setPos [0, 0, 0];
 			[trig_play_area, "marker_play_area"] call TMDG_adjust_marker_to_trigger;
+		}
+		else {
+			_size = base_play_area;
+
+			[trig_play_area, "marker_play_area", _size] call TMDG_adjust_marker_to_trigger;
 		};
 	};
 };

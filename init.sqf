@@ -12,8 +12,6 @@ timer_kill_limit = timer_kill_base_value;
 publicVariable "timer_kill_base_value";
 publicVariable "timer_kill_limit";
 
-isOut = false;
-
 null = [] execVm "scripts\Zone\ShrinkZone.sqf";
 null = [] execVm "scripts\Weapons\PlaceWeapons.sqf";
 null = [] execVm "scripts\Spawn\RandomSpawn.sqf";

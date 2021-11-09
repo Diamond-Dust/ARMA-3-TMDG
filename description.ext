@@ -89,6 +89,13 @@ class Params
 		texts[] = { "No weapons", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100", "120", "140", "160", "180", "200" };
 		default = 60;
 	};
+	class WeaponHolder
+	{
+		title = "Hunting Grounds Weapon Holder Type";
+		values[] = { 0, 1 };
+		texts[] = { "Tables", "Boxes + Smoke" };
+		default = 0;
+	};
 	class WeaponHunter
 	{
 		title = "Which Hunter Weapon?";
@@ -112,6 +119,13 @@ class Params
 	class ShowWeapons
 	{
 		title = "Show Weapons?";
+		values[] = { 0, 1 };
+		texts[] = { "No", "Yes" };
+		default = 0;
+	};
+	class ShowSpawnpoints
+	{
+		title = "Show Spawnpoints?";
 		values[] = { 0, 1 };
 		texts[] = { "No", "Yes" };
 		default = 0;
@@ -154,5 +168,28 @@ class CfgFunctions
 		{
 			class RandomWithinCircle {};
 		};
+	};
+};
+
+class CfgDebriefing
+{  
+	class EndPrey
+	{
+		title = "Zaroff is dead";
+		subtitle = "";
+		description = "The Most Dangerous Game has ended forever with the death of the greatest hunter, General Zaroff.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = { 0.0, 0.3, 0.6, 1 };
+	};
+	
+	class EndZaroff
+	{
+		title = "Hunt is complete";
+		subtitle = "";
+		description = "General Zaroff, the greatest hunter, is now able to marvel at his new hunt trophies. At least until the next The Most Dangerous Game.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = { 0.0, 0.3, 0.6, 1 };
 	};
 };

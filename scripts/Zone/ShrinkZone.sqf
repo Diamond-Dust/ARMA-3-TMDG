@@ -109,6 +109,35 @@ TMDG_spawn_smoke_on_trigger_boundary = {
 	};
 };
 
+TMDG_create_timer = {
+	params ["_time"];
+	with uiNamespace do
+	{	
+		waitUntil {!isNull findDisplay 46};
+		disableSerialization;
+		_ctrl = findDisplay 46 ctrlCreate ["RscStructuredText", 40001];
+		_ctrl ctrlSetPosition [safezoneX+0.45*safezoneW,safezoneY,0.1*safezoneW,0.023*safezoneH];
+		_ctrl ctrlSetStructuredText parseText format ["<t size='1' align='center'><img size='1' color='#ffffff' image='\A3\ui_f\data\map\markers\military\circle_CA.paa' /> %1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString];
+		_ctrl ctrlSetTextColor [0.9,0.9,0.9,1];
+		_ctrl ctrlSetBackgroundColor [0.1,0.1,0.1,0.9];
+		_ctrl ctrlCommit 0;
+	};
+};
+
+TMDG_update_timer = {
+	params ["_time"];
+	with uiNamespace do
+	{
+		_ctrl = findDisplay 46 displayCtrl 40001;
+		if (_time <= 10) then {
+			_ctrl ctrlSetStructuredText parseText format ["<t size='1' align='center' color='#aa0000'>%1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString];
+		} else {
+			_ctrl ctrlSetStructuredText parseText format ["<t size='1' align='center'>%1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString];
+		};
+		_ctrl ctrlCommit 0;
+	};
+};
+
 _timer_base_value = ["ShrinkingTimer", 120] call BIS_fnc_getParamValue;
 _resize_ratio = ["ShrinkingRatio", 80] call BIS_fnc_getParamValue;
 _resize_limit = ["ShrinkingLimit", 100] call BIS_fnc_getParamValue;
@@ -125,12 +154,15 @@ if isServer then
 		_resize_ratio = _resize_ratio / 100.0;
 		_timer = _timer_base_value;
 		_size = base_play_area;
+		_timer_created = false;
 
 		[trig_play_area, "marker_play_area", _size] call TMDG_adjust_marker_to_trigger;
 			
 		if (!_show_next) then {
 			deleteMarker "marker_next_play_area";
 		};
+		
+		[trig_play_area, _size] remoteExec ["TMDG_spawn_smoke_on_trigger_boundary"];
 
 		while {true} do
 		{	
@@ -147,6 +179,13 @@ if isServer then
 				["marker_next_play_area", [_new_size, _new_size], _new_trigger_pos] call TMDG_adjust_marker_to_params;
 			};
 			
+			waitUntil{time > 0};
+			
+			if (!_timer_created) then {
+				[_timer] remoteExec ["TMDG_create_timer"];
+				_timer_created = true;
+			};
+			
 			[trig_play_area, _size] remoteExec ["TMDG_spawn_smoke_on_trigger_boundary"];
 
 			while {_timer > 0} do
@@ -159,6 +198,9 @@ if isServer then
 				};
 			
 				_timer = _timer - 1;
+				
+				[_timer] remoteExec ["TMDG_update_timer"];
+		
 				sleep 1;
 			};
 			

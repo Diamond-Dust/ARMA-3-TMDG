@@ -1,3 +1,40 @@
+TMDG_create_timer_dog = {
+	params ["_time"];
+	
+	_size_multiplier = (30/11) * (getResolution select 5);
+	
+	with uiNamespace do
+	{	
+		waitUntil {!isNull findDisplay 46};
+		disableSerialization;
+		_ctrl = findDisplay 46 ctrlCreate ["RscStructuredText", 40003];
+		_ctrl ctrlSetStructuredText parseText format ["<t size='%3' align='center'><img size='%3' color='#ffffff' image='%2' />%1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString, getMissionPath "icons\dog2.paa", _size_multiplier];
+		_h = (ctrlTextHeight _ctrl)/3;
+		_w = (ctrlTextWidth _ctrl)/2;
+		_ctrl ctrlSetPosition [safezoneX+(1.0-_w)*safezoneW,safezoneY +(0.5-_h/2)*safezoneH,_w*safezoneW,_h*safezoneH];
+		_ctrl ctrlSetTextColor [0.9,0.9,0.9,1];
+		_ctrl ctrlSetBackgroundColor [0.1,0.1,0.1,0.9];
+		_ctrl ctrlCommit 0;
+	};
+};
+
+TMDG_update_timer_dog = {
+	params ["_time"];
+	
+	_size_multiplier = (30/11) * (getResolution select 5);
+	
+	with uiNamespace do
+	{
+		_ctrl = findDisplay 46 displayCtrl 40003;
+		if (_time <= 10) then {
+			_ctrl ctrlSetStructuredText parseText format ["<t size='%3' color='#bb0000' align='center'><img size='%3' color='#bb0000' image='%2' />%1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString, getMissionPath "icons\dog2.paa", _size_multiplier];
+		} else {
+			_ctrl ctrlSetStructuredText parseText format ["<t size='%3' align='center'><img color='#ffffff' size='%3' color='#ffffff' image='%2' />%1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString, getMissionPath "icons\dog2.paa", _size_multiplier];
+		};
+		_ctrl ctrlCommit 0;
+	};
+};
+
 waitUntil {time > 0};
 if ( playerSide != east ) exitWith {}; 
 
@@ -9,9 +46,11 @@ if (_dog_accuracy != -1) then {
 	_current_markers = [];
 	
 	_warmup_timer = 5;
+	[_warmup_timer] call TMDG_create_timer_dog;
 	while {_warmup_timer > 0} do
 	{
 		_warmup_timer = _warmup_timer - 1;
+		[_warmup_timer] call TMDG_update_timer_dog;
 		sleep 1;
 	};
 
@@ -47,11 +86,12 @@ if (_dog_accuracy != -1) then {
 			};
 		} forEach _preys;
 		
-		"Dogs have pointed out some preys." remoteExec ["hint"];
+		//"Dogs have pointed out some preys." remoteExec ["hint"];
 
 		while {_timer > 0} do
 		{
 			_timer = _timer - 1;
+			[_timer] call TMDG_update_timer_dog;
 			sleep 1;
 		};
 	

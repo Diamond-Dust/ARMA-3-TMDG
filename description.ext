@@ -177,7 +177,7 @@ class CfgDebriefing
 	{
 		title = "Zaroff is dead";
 		subtitle = "";
-		description = "The Most Dangerous Game has ended forever with the death of the greatest hunter, General Zaroff.";
+		description = "The Most Dangerous Game has killed the greatest hunter, General Zaroff.";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = { 0.0, 0.3, 0.6, 1 };
@@ -187,7 +187,7 @@ class CfgDebriefing
 	{
 		title = "Hunt is complete";
 		subtitle = "";
-		description = "General Zaroff, the greatest hunter, is now able to marvel at his new hunt trophies. At least until the next The Most Dangerous Game.";
+		description = "General Zaroff, the greatest hunter, is now able to marvel at his new trophies. At least until the next hunt.";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = { 0.0, 0.3, 0.6, 1 };

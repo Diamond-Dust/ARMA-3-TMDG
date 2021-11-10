@@ -111,13 +111,23 @@ TMDG_spawn_smoke_on_trigger_boundary = {
 
 TMDG_create_timer = {
 	params ["_time"];
+	
+	_size_multiplier = (30/11) * (getResolution select 5);
+	
 	with uiNamespace do
 	{	
 		waitUntil {!isNull findDisplay 46};
 		disableSerialization;
 		_ctrl = findDisplay 46 ctrlCreate ["RscStructuredText", 40001];
-		_ctrl ctrlSetPosition [safezoneX+0.45*safezoneW,safezoneY,0.1*safezoneW,0.023*safezoneH];
-		_ctrl ctrlSetStructuredText parseText format ["<t size='1' align='center'><img size='1' color='#ffffff' image='\A3\ui_f\data\map\markers\military\circle_CA.paa' /> %1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString];
+		_ctrl ctrlSetStructuredText parseText format ["<t size='%2' align='center'><img size='%2' color='#ffffff' image='\A3\ui_f\data\map\markers\military\circle_CA.paa' /> %1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString, _size_multiplier];
+		_h = (ctrlTextHeight _ctrl)/3;
+		_w = (ctrlTextWidth _ctrl)/2;
+		_ctrl ctrlSetPosition [
+			safezoneX+(1.0-_w)*safezoneW,
+			safezoneY +(0.5-_h/2)*safezoneH - 3*_h/2 - 0.01 * _size_multiplier,
+			_w*safezoneW,
+			_h*safezoneH
+		];
 		_ctrl ctrlSetTextColor [0.9,0.9,0.9,1];
 		_ctrl ctrlSetBackgroundColor [0.1,0.1,0.1,0.9];
 		_ctrl ctrlCommit 0;
@@ -126,13 +136,16 @@ TMDG_create_timer = {
 
 TMDG_update_timer = {
 	params ["_time"];
+	
+	_size_multiplier = (30/11) * (getResolution select 5);
+	
 	with uiNamespace do
 	{
 		_ctrl = findDisplay 46 displayCtrl 40001;
 		if (_time <= 10) then {
-			_ctrl ctrlSetStructuredText parseText format ["<t size='1' align='center' color='#aa0000'>%1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString];
+			_ctrl ctrlSetStructuredText parseText format ["<t size='%2' align='center' color='#aa0000'><img size='%2' color='#aa0000' image='\A3\ui_f\data\map\markers\military\circle_CA.paa' /> %1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString, _size_multiplier];
 		} else {
-			_ctrl ctrlSetStructuredText parseText format ["<t size='1' align='center'>%1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString];
+			_ctrl ctrlSetStructuredText parseText format ["<t size='%2' align='center'><img size='%2' color='#ffffff' image='\A3\ui_f\data\map\markers\military\circle_CA.paa' /> %1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString, _size_multiplier];
 		};
 		_ctrl ctrlCommit 0;
 	};
@@ -221,7 +234,7 @@ if isServer then
 			
 			_timer = _timer_base_value;
 			
-			(format ["Hunt area decreased.\nNext shrinking in %1 seconds.", _timer]) remoteExec ["hint"];
+			//(format ["Hunt area decreased.\nNext shrinking in %1 seconds.", _timer]) remoteExec ["hint"];
 		};
 
 	}

@@ -9,7 +9,7 @@ TMDG_out_of_bounds = {
 TMDG_update_timer_out = {
 	params ["_time"];
 	
-	_size_multiplier = (30/11) * (getResolution select 5);
+	_size_multiplier = (30/11) * (getResolution select 5)/1.5;
 	
 	with uiNamespace do
 	{
@@ -24,7 +24,7 @@ TMDG_update_timer_out = {
 TMDG_update_timer_in = {
 	params ["_time", "_timer_max_value"];
 	
-	_size_multiplier = (30/11) * (getResolution select 5);
+	_size_multiplier = (30/11) * (getResolution select 5)/1.5;
 	
 	with uiNamespace do
 	{

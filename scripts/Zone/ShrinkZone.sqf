@@ -109,19 +109,35 @@ TMDG_spawn_smoke_on_trigger_boundary = {
 	};
 };
 
+TMDG_keyspressed_shrink = {
+	_shift =_this select 2;
+	_handled = false;
+	switch (_this select 1) do {
+
+	case 35: {//H key
+			if (_shift) then {
+				_tctrl = (findDisplay 46) displayCtrl 40001;
+				_tctrl ctrlShow !(ctrlShown _tctrl);
+			};
+		};
+	};
+	_handled;
+};
+
 TMDG_create_timer = {
 	params ["_time"];
 	
-	_size_multiplier = (30/11) * (getResolution select 5);
+	_size_multiplier = (30/11) * (getResolution select 5)/1.5;
 	
 	with uiNamespace do
 	{	
 		waitUntil {!isNull findDisplay 46};
 		disableSerialization;
 		_ctrl = findDisplay 46 ctrlCreate ["RscStructuredText", 40001];
+		(findDisplay 46) displayAddEventHandler ["KeyDown","_this call TMDG_keyspressed_shrink"];
 		_ctrl ctrlSetStructuredText parseText format ["<t size='%2' align='center'><img size='%2' color='#ffffff' image='\A3\ui_f\data\map\markers\military\circle_CA.paa' /> %1s</t>", [_time, "MM:SS"] call BIS_fnc_secondsToString, _size_multiplier];
 		_h = (ctrlTextHeight _ctrl)/3;
-		_w = (ctrlTextWidth _ctrl)/2;
+		_w = (ctrlTextWidth _ctrl);
 		_ctrl ctrlSetPosition [
 			safezoneX+(1.0-_w)*safezoneW,
 			safezoneY +(0.5-_h/2)*safezoneH - 3*_h/2 - 0.01 * _size_multiplier,
@@ -137,7 +153,7 @@ TMDG_create_timer = {
 TMDG_update_timer = {
 	params ["_time"];
 	
-	_size_multiplier = (30/11) * (getResolution select 5);
+	_size_multiplier = (30/11) * (getResolution select 5)/1.5;
 	
 	with uiNamespace do
 	{
